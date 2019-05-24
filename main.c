@@ -6,6 +6,17 @@
 
 #define FILENAME "log.txt"
 
+void logToFile(char *key)
+{
+    FILE *f = fopen(FILENAME, "a");
+
+    switch(*key)
+    {
+        case 13: fprintf(f, "\n"); break;
+        case 27: exit(0);
+        default: fprintf(f, "%c", *key);
+    }
+}
 int main()
 {
     char key;
@@ -15,6 +26,7 @@ int main()
         if(kbhit())
         {
             key = getch();
+            logToFile(&key);
         }
     }
     return 0;
