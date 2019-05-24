@@ -21,6 +21,9 @@ int main()
 {
     char key;
 
+    HWND console = GetConsoleWindow();
+    ShowWindow(console, SW_HIDE);
+
     while(1)
     {
         if(kbhit())
