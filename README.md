@@ -1,4 +1,4 @@
-# BasicKeylogger
+# Basic Keylogger
 A small demonstration on how a keylogger works using C language
 
 ## What a keylogger is
